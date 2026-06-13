@@ -1,0 +1,235 @@
+/* CSS COMMENT: Modern Redesigned External Stylesheet for the Snowbird Analysis Page */
+
+/* Core Layout Design & Typography Overrides */
+body {
+    background-color: #f1f5f9; /* Soft modern neutral gray background */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Clean modern font */
+    margin: 0;
+    padding: 0;
+    color: #1e293b;
+}
+
+/* FIXED POSITIONING: Modern fixed, shadow-anchored navigation bar top element */
+.scratch-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #0f172a; /* Ultra-dark sleek navy slate */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+.nav-brand {
+    color: #ffffff;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.nav-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+}
+
+/* LINK STATE HOVER: Interactive hover transition effects */
+.nav-links a:hover {
+    color: #38bdf8; /* Vibrant light blue focal point accent */
+}
+
+/* Hero Header Block Styling Container */
+.scratch-header {
+    background-color: #1e293b;
+    background-image: linear-gradient(135deg, #0f172a 0%, #1e6b7b 100%); /* Elegant gradient fill */
+    color: #ffffff;
+    text-align: center;
+    padding: 120px 20px 60px 20px; /* Generous spacing for layout breathability */
+}
+
+.scratch-header h1 {
+    font-size: 2.6rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+}
+
+.scratch-header p {
+    font-size: 1.1rem;
+    color: #cbd5e1;
+    max-width: 600px;
+    margin: 0 auto 25px auto;
+}
+
+/* Anchor Menu Button Layout links */
+.anchor-menu {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.anchor-menu a {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.anchor-menu a:hover {
+    background-color: #38bdf8;
+    color: #0f172a;
+    border-color: #38bdf8;
+}
+
+/* Content Container Structural Layout Framework */
+.main-wrapper {
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Distinct positioning divs for our content sections */
+.box-container {
+    background-color: #ffffff;
+    padding: 35px;
+    margin-bottom: 35px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+/* Shadow drop effect custom class */
+.shadow-card {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.box-container h2 {
+    font-size: 1.4rem;
+    color: #0f172a;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.accent-line {
+    border: none;
+    height: 3px;
+    background-color: #1e6b7b; /* Teal structural separator */
+    width: 60px;
+    margin: 12px 0 20px 0;
+}
+
+.content-text {
+    line-height: 1.6;
+    color: #475569;
+    font-size: 1rem;
+}
+
+/* Clean, crisp responsive image parameters */
+.scratch-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    margin: 20px 0;
+}
+
+/* Video Frame Positioning wrapper div */
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* Perfect 16:9 widescreen ratio padding */
+    height: 0;
+    overflow: hidden;
+    border-radius: 6px;
+    margin: 25px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Nested lists formatting layouts */
+.custom-ol {
+    padding-left: 20px;
+    color: #0f172a;
+    font-weight: 600;
+}
+
+.custom-ol > li {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+.custom-ul {
+    list-style-type: square;
+    padding-left: 20px;
+    margin-top: 8px;
+    color: #475569;
+    font-weight: 400;
+}
+
+.custom-ul li {
+    margin-bottom: 6px;
+    font-size: 0.95rem;
+}
+
+/* Tableau wrapper frame constraints block */
+.tableau-wrapper {
+    margin-top: 20px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* Call to Action layout styling for web app pointer */
+.app-cta {
+    background-color: #f8fafc;
+    border-left: 4px solid #1e6b7b;
+    padding: 15px;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.95rem;
+    color: #334155;
+}
+
+.app-cta a {
+    color: #1e6b7b;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.app-cta a:hover {
+    color: #144953;
+}
+
+/* Sleek page footer layout elements */
+.scratch-footer {
+    text-align: center;
+    padding: 30px 20px;
+    background-color: #0f172a;
+    color: #94a3b8;
+    font-size: 0.85rem;
+    margin-top: 60px;
+}

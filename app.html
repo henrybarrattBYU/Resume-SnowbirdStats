@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snowbird Live Trail Traffic & Powder Advisor</title>
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <style>
+        /* CSS STYLING: Built-in scoped styles for single-page assignment compliance */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f172a;
+            color: #f1f5f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .app-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        /* Top Navigation Header bar layout */
+        header {
+            text-align: center;
+            background-image: linear-gradient(135deg, #1e293b 0%, #1e6b7b 100%);
+            padding: 40px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.2rem;
+            color: #ffffff;
+        }
+
+        header p {
+            margin: 0 0 20px 0;
+            color: #cbd5e1;
+            font-size: 1.05rem;
+        }
+
+        .back-links a {
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0 15px;
+            font-size: 0.9rem;
+        }
+
+        .back-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Interactive Filter Matrix Controls Layout */
+        .controls-grid {
+            background-color: #1e293b;
+            padding: 20px;
+            border-radius: 8px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+            border: 1px solid #334155;
+        }
+
+        .control-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .control-item label {
+            font-size: 0.85rem;
+            text-uppercase: true;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .control-item select {
+            background-color: #0f172a;
+            color: #ffffff;
+            border: 1px solid #475569;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            outline: none;
+            cursor: pointer;
+        }
+
+        /* Dynamic Trail Dashboard Grid Cards Layout */
+        .trail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .trail-card {
+            background-color: #1e293b;
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 5px solid #64748b;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .trail-card:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Dynamic Difficulty rating indicator classes */
+        .border-green { border-left-color: #22c55e !important; }
+        .border-blue { border-left-color: #3b82f6 !important; }
+        .border-black { border-left-color: #a855f7 !important; }
+
+        .trail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 10px;
+        }
+
+        .trail-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .difficulty-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .badge-green { background-color: #16a34a; color: white; }
+        .badge-blue { background-color: #2563eb; color: white; }
+        .badge-black { background-color: #000000; color: #a855f7; border: 1px solid #a855f7; }
+
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .metric-label {
+            color: #94a3b8;
+        }
+
+        .metric-value {
+            font-weight: 600;
+        }
+
+        /* Dynamic traffic reporter visual status triggers */
+        .status-heavy { color: #ef4444; font-weight: bold; }
+        .status-moderate { color: #f59e0b; font-weight: bold; }
+        .status-clear { color: #10b981; font-weight: bold; }
+
+        /* Summary Advisor Box layout definitions */
+        .summary-advisor {
+            background-color: #0284c7;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .summary-advisor i {
+            font-size: 2.5rem;
+        }
+
+        .summary-text h3 {
+            margin: 0 0 5px 0;
+            font-size: 1.15rem;
+        }
+
+        .summary-text p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: #e0f2fe;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <header>
+            <h1><i class="fas fa-traffic-light me-2"></i> Snowbird Live Run Reporter</h1>
+            <p>Interactive Run-Traffic Density and Historical Snow Accumulation Matrix Tool</p>
+            <div class="back-links">
+                <a href="index.html"><i class="fas fa-home"></i> Portfolio Home</a>
+                <a href="scratch.html"><i class="fas fa-chevron-left"></i> Back to Snowbird Analysis</a>
+            </div>
+        </header>
+
+        <div class="summary-advisor" id="advisorBanner">
+            <i class="fas fa-snowflake"></i>
+            <div class="summary-text">
+                <h3 id="advisorTitle">Morning Traffic Report Overview</h3>
+                <p id="advisorDesc">Select filtering metrics below to isolate operational run volumes and identify optimal powder lines around Little Cottonwood Canyon.</p>
+            </div>
+        </div>
+
+        <div class="controls-grid">
+            <div class="control-item">
+                <label for="difficultyFilter">Filter by Run Difficulty</label>
+                <select id="difficultyFilter" onchange="filterTrails()">
+                    <option value="all">Show All Difficulties</option>
+                    <option value="Green">Green (Beginner)</option>
+                    <option value="Blue">Blue (Intermediate)</option>
+                    <option value="Black">Black (Advanced / Expert)</option>
+                </select>
+            </div>
+
+            <div class="control-item">
+                <label for="terrainFilter">Filter by Terrain Type</label>
+                <select id="terrainFilter" onchange="filterTrails()">
+                    <option value="all">Show All Terrain Types</option>
+                    <option value="Groomer">Groomers</option>
+                    <option value="Open">Open Faces</option>
+                    <option value="Bowl">Alpine Bowls</option>
+                    <option value="Moggles">Mogul Fields</option>
+                    <option value="Trees">Glade Trees</option>
+                </select>
+            </div>
+
+            <div class="control-item">
+                <label for="trafficFilter">Filter by Traffic Load</label>
+                <select id="trafficFilter" onchange="filterTrails()">
+                    <option value="all">Show All Traffic Loads</option>
+                    <option value="Tight">Heavy Gridlock (Tight)</option>
+                    <option value="Sparse">Moderate / Commuter (Sparse)</option>
+                    <option value="Empty">Wide Open (Empty)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="trail-grid" id="trailGridContainer">
+            </div>
+
+    </div>
+
+    <script>
+        // HARDCODED SNAPSHOT SOURCE: Directly structured from your uploaded Snowbird CSV datasets
+        const snowbirdTrailDatabase = [
+            { name: "Chickadee", riders: 1200, difficulty: "Green", grade: "12%", terrain: "Groomer", density: "Tight", snow23: 713, snow26: 425 },
+            { name: "Big Emma", riders: 2200, difficulty: "Green", grade: "15%", terrain: "Groomer", density: "Tight", snow23: 722, snow26: 426 },
+            { name: "Regulator Johnson", riders: 2100, difficulty: "Blue", grade: "32%", terrain: "Open", density: "Tight", snow23: 868, snow26: 525 },
+            { name: "Bassackwards", riders: 1800, difficulty: "Blue", grade: "24%", terrain: "Groomer", density: "Tight", snow23: 891, snow26: 501 },
+            { name: "Silver Fox", riders: 850, difficulty: "Black", grade: "48%", terrain: "Bowl", density: "Sparse", snow23: 1029, snow26: 585 },
+            { name: "Great Scott", riders: 450, difficulty: "Black", grade: "55%", terrain: "Bowl", density: "Sparse", snow23: 993, snow26: 577 },
+            { name: "Mach Schnell", riders: 600, difficulty: "Black", grade: "44%", terrain: "Moggles", density: "Sparse", snow23: 1012, snow26: 592 },
+            { name: "Rasta Chutes", riders: 200, difficulty: "Black", grade: "65%", terrain: "Trees", density: "Empty", snow23: 975, snow26: 560 },
+            { name: "Pipeline Couloir", riders: 90, difficulty: "Black", grade: "75%", terrain: "Bowl", density: "Empty", snow23: 988, snow26: 602 }
+        ];
+
+        // Computational render initialization block
+        function generateTrailDashboard(trails) {
+            const container = document.getElementById('trailGridContainer');
+            container.innerHTML = ''; // Wipe current cards before array load
+
+            if (trails.length === 0) {
+                container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #94a3b8;">
+                    <i class="fas fa-exclamation-triangle fa-2x mb-2"></i><br>No runs match your specific filter parameter intersections. Try adjusting criteria variables!
+                </div>`;
+                return;
+            }
+
+            trails.forEach(trail => {
+                // Determine difficulty color mapping variables
+                let diffClass = 'border-green';
+                let badgeClass = 'badge-green';
+                if (trail.difficulty === 'Blue') { diffClass = 'border-blue'; badgeClass = 'badge-blue'; }
+                if (trail.difficulty === 'Black') { diffClass = 'border-black'; badgeClass = 'badge-black'; }
+
+                // Map traffic density parameter to human reporter outputs
+                let densityText = 'Wide Open (Powder Untracked)';
+                let densityStatusClass = 'status-clear';
+                if (trail.density === 'Tight') { densityText = 'Heavy Gridlock (High Clog)'; densityStatusClass = 'status-heavy'; }
+                if (trail.density === 'Sparse') { densityText = 'Moderate Commute (Watch Edges)'; densityStatusClass = 'status-moderate'; }
+
+                // Construct full layout card string element
+                const card = document.createElement('div');
+                card.className = `trail-card ${diffClass}`;
+                card.innerHTML = `
+                    <div class="trail-header">
+                        <span class="trail-name">${trail.name}</span>
+                        <span class="difficulty-badge ${badgeClass}">${trail.difficulty}</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label"><i class="fas fa-users-cog me-1"></i> Riders / Day:</span>
+                        <span class="metric-value">${trail.riders.toLocaleString()} skiers</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label"><i class="fas fa-mountain me-1"></i> Slope Grade:</span>
+                        <span class="metric-value">${trail.grade}</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label"><i class="fas fa-tree me-1"></i> Terrain Set:</span>
+                        <span class="metric-value">${trail.terrain}</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label"><i class="fas fa-car-burst me-1"></i> Traffic Index:</span>
+                        <span class="metric-value ${densityStatusClass}">${densityText}</span>
+                    </div>
+                    <div class="metric-row" style="margin-top: 12px; padding-top: 8px; border-top: 1px dashed #334155;">
+                        <span class="metric-label"><i class="fas fa-history me-1"></i> 2023 Peak Snowfall:</span>
+                        <span class="metric-value" style="color: #38bdf8;">${trail.snow23} in</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label"><i class="fas fa-cloud-showers-heavy me-1"></i> 2026 Season Base:</span>
+                        <span class="metric-value" style="color: #38bdf8;">${trail.snow26} in</span>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            // Dynamically evaluate conditions to provide live smart advisor outputs
+            updateAdvisorMetrics(trails);
+        }
+
+        // Smart system advisor conditional evaluator logic tracking structural changes
+        function updateAdvisorMetrics(filteredArray) {
+            const title = document.getElementById('advisorTitle');
+            const desc = document.getElementById('advisorDesc');
+            const banner = document.getElementById('advisorBanner');
+
+            // Find high potential uncrowded deep powder options (Low congestion, Black diamond bowl zones)
+            const powerLines = filteredArray.filter(t => t.difficulty === 'Black' && t.density === 'Empty');
+            const heavyGridlock = filteredArray.filter(t => t.density === 'Tight');
+
+            if (powerLines.length > 0) {
+                banner.style.backgroundColor = '#16a34a'; // Success alert green
+                title.innerHTML = `<i class="fas fa-bullhorn me-1"></i> High-Alert Powder Lines Identified!`;
+                desc.innerHTML = `System metrics isolate <strong>${powerLines.map(t=>t.name).join(' & ')}</strong> as completely clear of commuter gridlock with historical peaks hitting over 900" of untracked snow. Head there now!`;
+            } else if (heavyGridlock.length === filteredArray.length) {
+                banner.style.backgroundColor = '#dc2626'; // Alert warning red
+                title.innerHTML = `<i class="fas fa-exclamation-circle me-1"></i> Heavy Base Clog Detected!`;
+                desc.innerHTML = `All currently filtered runs show tight bottlenecks exceeding 1,200 skiers daily. Exercise structural awareness and expect delays near tram terminals.`;
+            } else {
+                banner.style.backgroundColor = '#0284c7'; // Corporate advisor blue
+                title.innerHTML = `<i class="fas fa-info-circle me-1"></i> Traffic Matrix Status: Stable`;
+                desc.innerHTML = `Currently tracking ${filteredArray.length} active mountain channels. Keep safety weights distributed evenly across edge lines.`;
+            }
+        }
+
+        // Filter trigger logic loop intersecting input criteria parameters
+        function filterTrails() {
+            const difficultyValue = document.getElementById('difficultyFilter').value;
+            const terrainValue = document.getElementById('terrainFilter').value;
+            const trafficValue = document.getElementById('trafficFilter').value;
+
+            const workingFilteredTrails = snowbirdTrailDatabase.filter(trail => {
+                const matchDifficulty = (difficultyValue === 'all' || trail.difficulty === difficultyValue);
+                const matchTerrain = (terrainValue === 'all' || trail.terrain === terrainValue);
+                const matchTraffic = (trafficValue === 'all' || trail.density === trafficValue);
+                
+                return matchDifficulty && matchTerrain && matchTraffic;
+            });
+
+            generateTrailDashboard(workingFilteredTrails);
+        }
+
+        // Initialize display configuration state on page instantiation load
+        window.onload = function() {
+            generateTrailDashboard(snowbirdTrailDatabase);
+        };
+    </script>
+
+</body>
+</html>

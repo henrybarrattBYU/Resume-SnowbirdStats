@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snowbird Analysis Page - Henry Barratt</title>
+    <link rel="stylesheet" href="scratch-style.css">
+</head>
+<body>
+
+    <nav class="scratch-nav">
+        <div class="nav-container">
+            <span class="nav-brand">Henry Barratt Analysis</span>
+            <div class="nav-links">
+                <a href="index.html">Home Portfolio</a>
+                <a href="Resume.html">Official Resume</a>
+                <a href="app.html" style="color: #38bdf8;">Live Run Reporter</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="scratch-header">
+        <div class="header-overlay">
+            <h1>Snowbird Ski Resort Analysis</h1>
+            <p>An administrative and structural evaluation of Utah's premier alpine destination.</p>
+            
+            <div class="anchor-menu">
+                <a href="#media-section">Resort Media</a>
+                <a href="#stats-section">Mountain Layout</a>
+                <a href="#data-section">Statistical Data</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-wrapper">
+
+        <div id="media-section" class="box-container shadow-card">
+            <h2><i class="fas fa-camera"></i> Environment & Chute Geography</h2>
+            <hr class="accent-line">
+            
+            <img src="assets/img/snowbird.jpg" alt="Snowy Mountains" class="scratch-img text-shadow">
+            
+            <p class="content-text">Snowbird is uniquely positioned within Little Cottonwood Canyon, renowned globally for its extreme terrain matrix, steep vertical drops, and consistent, high-density dry Wasatch powder distributions. The media below highlights the operational environment in real-time:</p>
+            
+            <div class="video-wrapper">
+                <iframe 
+                    src="https://www.youtube.com/embed/S_8qMv_1n-o" 
+                    title="Snowbird Skiing Video" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            
+            <div class="app-cta">
+                <span>Interactive Tool:</span> Try out the custom <a href="app.html">Snowbird Powder Advisor Web App</a>.
+            </div>
+        </div>
+
+        <div id="stats-section" class="box-container shadow-card">
+            <h2><i class="fas fa-list-ol"></i> Operational Metric Frameworks</h2>
+            <hr class="accent-line">
+            <p class="content-text">The following nested structures catalog the physical assets, lift infrastructure arrays, and operational bounds defining the resort layout:</p>
+            
+            <ol class="custom-ol">
+                <li><strong>Geographic Boundary Specifications:</strong>
+                    <ul class="custom-ul">
+                        <li>Average Annual Snowfall Level: 500+ Inches</li>
+                        <li>Total Skiable Operational Boundary: 2,500 Acres</li>
+                        <li>Maximum Continuous Vertical Drop: 3,240 Feet</li>
+                    </ul>
+                </li>
+                <li><strong>Mechanical Transit Infrastructure:</strong>
+                    <ul class="custom-ul">
+                        <li>The Iconic Aerial Tram (Direct transit line to Hidden Peak)</li>
+                        <li>Mineral Basin Express (High-speed detachables serving the back bowl)</li>
+                        <li>Gadzoom & Peruvian Express Quad Arrays (Lower mountain network anchors)</li>
+                    </ul>
+                </li>
+                <li><strong>Critical Technical Terrain Chutes:</strong>
+                    <ul class="custom-ul">
+                        <li>The Cirque Traverse Drop Zones</li>
+                        <li>Regulator Johnson Chute Pathway</li>
+                        <li>Dalton's Draw Outflow Line</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <div id="data-section" class="box-container shadow-card">
+            <h2><i class="fas fa-chart-bar"></i> Snowfall Analytics Workspace</h2>
+            <hr class="accent-line">
+            <p class="content-text">This interactive database module pulls records live from public data repositories, tracking season metrics across major operational centers:</p>
+            
+            <div class="tableau-wrapper" style="padding: 10px; background-color: #ffffff;">
+                <div class='tableauPlaceholder' id='viz1781308153225' style='position: relative; width: 100%; margin: 0 auto;'>
+                    <noscript>
+                        <a href='#'>
+                            <img alt='Snowbird Stats ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Sn&#47;SnowbirdStatsDashboard&#47;SnowbirdStats&#47;1_rss.png' style='border: none' />
+                        </a>
+                    </noscript>
+                    <object class='tableauViz' style='display:none;'>
+                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+                        <param name='embed_code_version' value='3' /> 
+                        <param name='site_root' value='' />
+                        <param name='name' value='SnowbirdStatsDashboard&#47;SnowbirdStats' />
+                        <param name='tabs' value='no' />
+                        <param name='toolbar' value='yes' />
+                        <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Sn&#47;SnowbirdStatsDashboard&#47;SnowbirdStats&#47;1.png' /> 
+                        <param name='animate_transition' value='yes' />
+                        <param name='display_static_image' value='yes' />
+                        <param name='display_spinner' value='yes' />
+                        <param name='display_overlay' value='yes' />
+                        <param name='display_count' value='yes' />
+                        <param name='language' value='en-US' />
+                        <param name='filter' value='publish=yes' />
+                    </object>
+                </div>                
+                <script type='text/javascript'>                    
+                    var divElement = document.getElementById('viz1781308153225');                    
+                    var vizElement = divElement.getElementsByTagName('object')[0];                    
+                    if ( divElement.offsetWidth > 800 ) { 
+                        vizElement.style.minWidth='420px';vizElement.style.maxWidth='650px';vizElement.style.width='100%';vizElement.style.minHeight='587px';vizElement.style.maxHeight='887px';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';
+                    } else if ( divElement.offsetWidth > 500 ) { 
+                        vizElement.style.minWidth='420px';vizElement.style.maxWidth='650px';vizElement.style.width='100%';vizElement.style.minHeight='587px';vizElement.style.maxHeight='887px';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';
+                    } else { 
+                        vizElement.style.width='100%';vizElement.style.height='1377px';
+                    }                     
+                    var scriptElement = document.createElement('script');                    
+                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+                </script>
+            </div>
+        </div>
+        
+    </main>
+
+    <footer class="scratch-footer">
+        <p>Henry Barratt Operational Analysis Matrix &copy; 2026 | Powered by Tableau Systems</p>
+    </footer>
+
+</body>
+</html>
